@@ -39,7 +39,8 @@ test:
     - nosetests -v  --processes=4 --process-timeout=200 --with-coverage --cover-package pkg --cover-package pkg/queryGenerators --cover-package test --cover-package . --cover-package pkg/queryGenerators test/*.py:
           parallel: false
     - mv .coverage .coverage.1
-    - coverage run --omit '/home/ubuntu/*/*/*/*,/usr/*' -p mpmain.py 3 config.xml
+    #- coverage run --omit '/home/ubuntu/*/*/*/*,/usr/*' -p mpmain.py 3 config.xml
+    - coverage run --omit '/home/ubuntu/*/*/*/*,/usr/*' main.py -f config.xml
     - ls -aRl .coverage*
     # combine with two processes running coverage seems broken
     - coverage combine
