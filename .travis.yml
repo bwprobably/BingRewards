@@ -17,5 +17,7 @@ before_script:
 script: nosetests -v  --processes=4 --process-timeout=200 --with-coverage --cover-package pkg --cover-package pkg/queryGenerators --cover-package test --cover-package . --cover-package pkg/queryGenerators test/*.py
 
 after_success:
+  - openssl aes-256-cbc -d -in config.xml.encrypted.1 -k "${AES}" > config.xml
+  - coverage --omit '/home/travis/virtualenv/python2.7.13/*,mpmain.py' main.py -f config.xml
   - coverage report --omit '/home/travis/virtualenv/python2.7.13/*,mpmain.py'
   #- coveralls
