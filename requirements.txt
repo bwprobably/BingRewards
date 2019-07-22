@@ -12,4 +12,4 @@ six==1.11.0
 wrapt==1.10.11
 
 pathos==0.2.1
-beautifulsoup4==4.6.0
+beautifulsoup4==4.8.0
