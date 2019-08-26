@@ -1,13 +1,13 @@
 version: 2.0
 
 jobs:
-  checkout_code:
+  checkout_bing:
     docker:
       - image: circleci/python:2.7.10
     steps:
       - checkout
 
-  test:
+  test_code:
     docker:
       - image: circleci/python:2.7.10  
     steps:
@@ -48,8 +48,8 @@ workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - checkout_code
+      - checkout_bing
   
       - deploy:
           requires:
-            - test
+            - test_code
