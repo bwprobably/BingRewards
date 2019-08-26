@@ -9,7 +9,7 @@ jobs:
 
       - run:
           name: upgrade
-          command: pip install --upgrade pip
+          command: sudo pip install --upgrade pip
 
       - run:
           name: ssl key
@@ -21,7 +21,7 @@ jobs:
 
       - run:
           name: install update
-          command: pip install -r requirements.txt
+          command: sudo pip install -r requirements.txt
           
       # checking parallel runs https://discuss.circleci.com/t/parallel-runs-status/15876/2 and test file for highest timeout
       # https://github.com/dlanger/nose-parallel
