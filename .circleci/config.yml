@@ -4,23 +4,8 @@ jobs:
   checkout_code:
     docker:
       - image: circleci/python:2.7.10
-    environment:
-      CODECLIMATE_REPO_TOKEN: b1bfad9809ef8b3be1eefa761352840a5ea632ef8bff0981fe295d61f9e2af84
-
-
-      # 1) uncomment below 
-      # 2) run something like ssh -p 64686 ubuntu@52.14.38.229 -L 5902:localhost:5901
-      # 3) remove ~/.vnc/xstartup that might be causing grey screen
-      # - mkdir -p ~/.vnc
-      # - touch /home/ubuntu/.Xauthority
-      # - echo "firefox &" >> ~/.vnc/xstartup 
-      # - vnc4server -geometry 1280x1024 -depth 24
-      # if need to syncup with upstream: https://gist.github.com/Chaser324/ce0505fbed06b947d962
     steps:
-      - run: pip install --upgrade pip
-      - run: openssl aes-256-cbc -d -in config.xml.encrypted -k "${KEY}" >> config.xml
-      - run: chmod og-r config.xml
-      - run: pip install -r requirements.txt
+      - checkout
 
   test:
     docker:
@@ -39,10 +24,32 @@ jobs:
       - run: ls .c*
       - run: coverage erase
       - run: nosetests -v  --processes=4 --process-timeout=200 --with-coverage --cover-package pkg --cover-package pkg/queryGenerators --cover-package test --cover-package . --cover-package pkg/queryGenerators test/*.py:
-            parallel: false
       - run: cp .coverage .coverage.1
       # need more loving from circleci coverage plugin
       - run: coverage run -p main.py -v -r
       # combine with two processes running coverage seems broken
       - run: coverage combine
       - run: rm -f config.xml
+
+  deploy:
+    machine:
+        enabled: true
+    working_directory: ~/circleci-demo-workflows
+    environment:
+      - CODECLIMATE_REPO_TOKEN: b1bfad9809ef8b3be1eefa761352840a5ea632ef8bff0981fe295d61f9e2af84
+    steps:
+      - checkout
+      - run: pip install --upgrade pip
+      - run: openssl aes-256-cbc -d -in config.xml.encrypted -k "${KEY}" >> config.xml
+      - run: chmod og-r config.xml
+      - run: pip install -r requirements.txt
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - checkout_code
+  
+      - deploy:
+          requires:
+            - test
