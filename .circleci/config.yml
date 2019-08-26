@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
 
-  test_code:
+  build:
     docker:
       - image: circleci/python:2.7.10  
     steps:
@@ -44,12 +44,3 @@ jobs:
       - run: chmod og-r config.xml
       - run: pip install -r requirements.txt
 
-workflows:
-  version: 2
-  build-and-deploy:
-    jobs:
-      - checkout_bing
-  
-      - deploy:
-          requires:
-            - test_code
