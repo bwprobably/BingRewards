@@ -10,9 +10,6 @@ jobs:
           CODECLIMATE_REPO_TOKEN: b1bfad9809ef8b3be1eefa761352840a5ea632ef8bff0981fe295d61f9e2af84
     steps:
       - checkout
-      - run:
-          name: key
-          command: echo ${KEY} ${TZ}
 
       - run:
           name: upgrade
@@ -20,7 +17,7 @@ jobs:
 
       - run:
           name: ssl key
-          command: openssl aes-256-cbc -d -in config.xml.encrypted -k "${KEY}" >> config.xml
+          command: sudo openssl aes-256-cbc -d -in config.xml.encrypted -k ${KEY} >> config.xml
 
       - run: 
           name: config
