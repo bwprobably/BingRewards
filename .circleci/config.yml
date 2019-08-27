@@ -58,8 +58,8 @@ jobs:
           command: nosetests -v  --processes=4 --process-timeout=200 --with-coverage --cover-package pkg --cover-package pkg/queryGenerators --cover-package test --cover-package . --cover-package pkg/queryGenerators test/*.py
           
       - run:
-          name: save temp report
-          command: cp .coverage .coverage.1
+          name: TODO save temp report
+          command: echo cp .coverage .coverage.1
 
       # need more loving from circleci coverage plugin
       - run:
