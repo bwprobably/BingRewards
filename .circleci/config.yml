@@ -6,10 +6,13 @@ jobs:
       - image: circleci/python:2.7.16-stretch-node-browsers-legacy
         environment:
           TZ: America/Los_Angeles
-          KEY: $KEY
+          KEY: ${KEY}
           CODECLIMATE_REPO_TOKEN: b1bfad9809ef8b3be1eefa761352840a5ea632ef8bff0981fe295d61f9e2af84
     steps:
       - checkout
+      - run:
+          name: key
+          command: echo ${KEY} ${TZ}
 
       - run:
           name: upgrade
