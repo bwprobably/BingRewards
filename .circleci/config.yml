@@ -54,8 +54,8 @@ jobs:
           command: coverage erase
           
       - run:
-          name: run with 4 processes code and test coverage
-          command: nosetests -v  --processes=4 --process-timeout=200 --with-coverage --cover-package pkg --cover-package pkg/queryGenerators --cover-package test --cover-package . --cover-package pkg/queryGenerators test/*.py
+          name: TODO run with 4 processes code and test coverage
+          command: echo nosetests -v  --processes=4 --process-timeout=200 --with-coverage --cover-package pkg --cover-package pkg/queryGenerators --cover-package test --cover-package . --cover-package pkg/queryGenerators test/*.py
           
       - run:
           name: TODO save temp report
