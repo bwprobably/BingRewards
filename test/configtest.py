@@ -1187,7 +1187,7 @@ class TestLong(unittest.TestCase):
         self._bp(bfp.RewardV1())
     
     @unittest.skip("skip if bsoap greater than 4.6.0")
-    def test_bingparser_bsoap_460
+    def test_bingparser_bsoap_460(self):
         self._bp(bdp.Reward())
 
     def _bp(self, classobj):
