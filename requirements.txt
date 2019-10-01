@@ -9,7 +9,7 @@ packaging==19.2
 pyparsing==2.2.0
 requests==2.22.0
 six==1.11.0
-wrapt==1.10.11
+wrapt==1.11.2
 
 pathos==0.2.5
 beautifulsoup4==4.6.0
